@@ -67,13 +67,23 @@ jobs:
         chmod +x $DIY_P1_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P1_SH
-
+    - name: modify feeds
+      run: |
+        cd openwrt
+        echo >> feeds.conf.default
+        echo 'src-git nas https://github.com/linkease/nas-packages.git;master' >> feeds.conf.default
+        echo 'src-git nas_luci https://github.com/linkease/nas-packages-luci.git;main' >> feeds.conf.default
+        echo 'src-git store https://github.com/linkease/istore.git;main' >> feeds.conf.default        
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
 
     - name: Install feeds
-      run: cd openwrt && ./scripts/feeds install -a
-
+      run: cd openwrt && ./scripts/feeds install -a -f
+    - name: download custom packages
+      run: |
+        cd openwrt/package/lean
+        git clone https://github.com/jjm2473/luci-theme-argon.git
+        git clone https://github.com/jjm2473/luci-app-argon-config.git       
     - name: Load custom configuration
       run: |
         [ -e files ] && mv files openwrt/files
