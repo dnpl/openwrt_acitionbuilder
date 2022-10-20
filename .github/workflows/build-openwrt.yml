@@ -81,7 +81,7 @@ jobs:
       run: cd openwrt && ./scripts/feeds install -a -f
     - name: download custom packages
       run: |
-        cd openwrt/package/lean
+        cd openwrt/package/feeds/luci
         rm -rf luci-theme-argon
         git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git       
     - name: Load custom configuration
