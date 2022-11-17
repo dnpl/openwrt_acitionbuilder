@@ -72,11 +72,16 @@ jobs:
 
     - name: Install feeds
       run: cd openwrt && ./scripts/feeds install -a -f
-    - name: download custom packages
+    - name: download custom theme packages
       run: |
         cd openwrt/package/feeds/third
         rm -rf luci-theme-argon
         git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git       
+    - name: Load custom configuration
+    - name: download custom application packages
+      run: |
+        cd openwrt/package/feeds/luci
+        git clone https://github.com/lisaac/luci-app-diskman.git       
     - name: Load custom configuration
       run: |
         [ -e files ] && mv files openwrt/files
