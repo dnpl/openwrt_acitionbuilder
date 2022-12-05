@@ -80,8 +80,8 @@ jobs:
       run: |
         cd openwrt/package/lean
         rm -rf luci-theme-argon
-        git clone https://github.com/lisaac/luci-app-diskman.git
-        git clone https://github.com/jerrykuku/luci-theme-argon.git
+        #git clone https://github.com/lisaac/luci-app-diskman.git
+        #git clone https://github.com/jerrykuku/luci-theme-argon.git
     - name: Load custom configuration
       run: |
         [ -e files ] && mv files openwrt/files
